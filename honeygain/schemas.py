@@ -35,6 +35,31 @@ class TermsOfService(BaseModel):
     accepted_at: date = Field(alias='first_terms_accepted_at')
 
 
+class DeviceStats(BaseModel):
+    """
+    Simple stats for a device.
+    """
+    total_traffic: int
+    total_credits: float
+    streaming_seconds: int
+
+
+class Device(BaseModel):
+    """
+    Represents an active device connected to your Honeygain account.
+    """
+    id: str
+    name: str = Field(alias='model')
+    platform: str
+    version: str
+    streaming_enabled: bool
+
+    ip: str
+    status: str
+    last_active_time: datetime
+    stats: DeviceStats
+
+
 #
 # Statistics
 #

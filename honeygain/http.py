@@ -9,7 +9,7 @@ from .exceptions import HTTPException
 class HoneygainHTTP:
     API_VERSION = 1
 
-    BASE_URL = f'https://dashboard.honeygain.com/api/v{API_VERSION}'
+    BASE_URL = 'https://dashboard.honeygain.com/api/v{version}'
     USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
 
     def __init__(self):
@@ -45,11 +45,11 @@ class HoneygainHTTP:
         """
         return self._token is not None
 
-    def request(self, method, endpoint, json=None, params=None) -> dict:
+    def request(self, method, endpoint, json=None, params=None, version=API_VERSION) -> dict:
         if self._sess is None:
             raise RuntimeError('Session not set up yet')
 
-        url = self.BASE_URL + endpoint
+        url = self.BASE_URL.format(version=version) + endpoint
         try:
             r = self._sess.request(method, url, json=json, params=params)
         except requests.HTTPError as ex:
@@ -74,6 +74,9 @@ class HoneygainHTTP:
 
     def get_me(self) -> dict:
         return self.request('GET', '/users/me')
+
+    def get_devices(self) -> dict:
+        return self.request('GET', '/devices', version=2)
 
     def get_tos(self) -> dict:
         return self.request('GET', '/users/tos')

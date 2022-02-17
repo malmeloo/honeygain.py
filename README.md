@@ -80,7 +80,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 - [x] `POST /users/tokens` - Logging in with email + password
 - [x] `GET /users/me` - Account details
 - [x] `GET /users/tos` - ToS statistics
-- [ ] `GET /devices` - Currently active devices and stats about them.
+- [x] `GET /devices` - Currently active devices and stats about them.
   **Note:** uses API v2.
 
 ### Notifications

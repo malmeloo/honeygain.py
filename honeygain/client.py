@@ -2,7 +2,7 @@ from pydantic import parse_obj_as
 
 from .exceptions import ClientException
 from .http import HoneygainHTTP
-from .schemas import UserProfile, TermsOfService, DailyStats
+from .schemas import UserProfile, Device, TermsOfService, DailyStats
 
 
 def _requires_login(func):
@@ -48,6 +48,11 @@ class Client:
     def get_profile(self) -> UserProfile:
         data = self.http.get_me().get('data')
         return UserProfile(**data)
+
+    @_requires_login
+    def get_devices(self):
+        data = self.http.get_devices().get('data')
+        return parse_obj_as(list[Device], data)
 
     @_requires_login
     def get_tos(self) -> TermsOfService:
