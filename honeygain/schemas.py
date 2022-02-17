@@ -4,6 +4,9 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
+#
+# Profile related
+#
 class UserProfile(BaseModel):
     """
     Represents a user's profile and associated data.
@@ -35,9 +38,6 @@ class TermsOfService(BaseModel):
 #
 # Statistics
 #
-# TrafficStats = DataclassSchema.from_dict({'credits': fields.Int(), 'traffic': fields.Int()})
-# CDNStats = DataclassSchema.from_dict({'credits': fields.Int(), 'time': fields.Int()})
-# CreditStats = DataclassSchema.from_dict({'credits': fields.Int()})
 class CreditStats(BaseModel):
     """
     A generic credit stat entry
