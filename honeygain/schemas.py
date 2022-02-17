@@ -74,25 +74,58 @@ class GatheringStats(CreditStats):
     """
     A single gathering stats entry
     """
-    traffic: int
+    traffic: int = Field(alias='bytes')
+
+    class Config:
+        """
+        Pydantic config to allow multiple aliases
+        """
+        allow_population_by_field_name = True
 
 
 class CDNStats(CreditStats):
     """
     A single content delivery network stats entry
     """
-    time: int
+    time: int = Field(alias='seconds')
+
+    class Config:
+        """
+        Pydantic config to allow multiple aliases
+        """
+        allow_population_by_field_name = True
 
 
-class DailyStats(BaseModel):
+class GenericStats(BaseModel):
+    """
+    Generic stats entry. Could be for any time period.
+    """
+    total: Optional[CreditStats]  # credits
+    referrals: CreditStats = Field(alias='referral')  # credits
+    winnings: CreditStats = Field(alias='winning')  # credits
+    other: CreditStats  # credits
+    bonus: Optional[CreditStats]  # credits
+
+    gathering: GatheringStats  # credits + traffic
+    content_delivery: CDNStats = Field(alias='cdn')  # credits + time
+
+    class Config:
+        """
+        Pydantic config to allow multiple aliases
+        """
+        allow_population_by_field_name = True
+
+
+class TodayStats(GenericStats):
+    """
+    Stats for the current day up until the current time.
+    This only exists for people to distinguish TodayStats from DailyStats.
+    """
+    pass
+
+
+class DailyStats(GenericStats):
     """
     Represents a daily stats entry.
     """
     date: date
-
-    gathering: GatheringStats  # credits + traffic
-    content_delivery: CDNStats  # credits + time
-    referrals: CreditStats  # credits
-    winnings: CreditStats  # credits
-    other: CreditStats  # credits
-    bonus: Optional[CreditStats]  # credits

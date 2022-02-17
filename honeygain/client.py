@@ -2,7 +2,7 @@ from pydantic import parse_obj_as
 
 from .exceptions import ClientException
 from .http import HoneygainHTTP
-from .schemas import UserProfile, Device, TermsOfService, DailyStats
+from .schemas import UserProfile, Device, TermsOfService, TodayStats, DailyStats
 
 
 def _requires_login(func):
@@ -67,8 +67,18 @@ class Client:
         return parse_obj_as(list[DailyStats], parsed)
 
     @_requires_login
-    def get_monthly_jt_stats(self) -> list[DailyStats]:
+    def get_jt_monthly_stats(self) -> list[DailyStats]:
         data = self.http.get_jt_stats()
         parsed: list[dict] = [{'date': k, **v} for k, v in data.items()]
 
         return parse_obj_as(list[DailyStats], parsed)
+
+    @_requires_login
+    def get_today_earnings(self) -> TodayStats:
+        data = self.http.get_earnings_today()
+        return TodayStats(**data)
+
+    @_requires_login
+    def get_jt_today_earnings(self) -> TodayStats:
+        data = self.http.get_jt_earnings_today()
+        return TodayStats(**data)

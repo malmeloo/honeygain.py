@@ -86,3 +86,9 @@ class HoneygainHTTP:
 
     def get_jt_stats(self) -> dict:
         return self.request('GET', '/jt-earnings/stats')
+
+    def get_earnings_today(self) -> dict:
+        return self.request('GET', '/earnings/today')
+
+    def get_jt_earnings_today(self) -> dict:
+        return self.request('GET', '/jt-earnings/today')

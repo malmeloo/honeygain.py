@@ -104,5 +104,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 
 ### Current day earnings
 
-- [ ] `GET /earnings/today` - Current day earnings for "normal" mode, with detailed information about the origin of your
+- [x] `GET /earnings/today` - Current day earnings for "normal" mode, with detailed information about the origin of your
   earnings.
+- [x] `GET /jt-earnings/today` - Current day earnings for JumpTask mode, with detailed information about the origin of
+  your earnings.
