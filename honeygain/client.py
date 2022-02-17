@@ -60,3 +60,10 @@ class Client:
         parsed: list[dict] = [{'date': k, **v} for k, v in data.items()]
 
         return parse_obj_as(list[DailyStats], parsed)
+
+    @_requires_login
+    def get_monthly_jt_stats(self) -> list[DailyStats]:
+        data = self.http.get_jt_stats()
+        parsed: list[dict] = [{'date': k, **v} for k, v in data.items()]
+
+        return parse_obj_as(list[DailyStats], parsed)
