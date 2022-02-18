@@ -5,8 +5,12 @@ from distutils.core import setup
 with open('README.md', 'r') as file:
     long_description = file.read()
 
-with open('requirements.txt', 'r') as file:
-    requirements = [f.strip() for f in file.readlines()]
+try:
+    with open('requiremnts.txt', 'r') as file:
+        requirements = [f.strip() for f in file.readlines()]
+except FileNotFoundError:
+    print('[!] Falling back to hardcoded requirements')
+    requirements = ['requests>=2.27,<2.28', 'pydantic>=1.9.0,<1.10.0']
 
 setup(
     name='Honeygain.py',
