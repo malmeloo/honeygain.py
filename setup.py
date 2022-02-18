@@ -6,7 +6,7 @@ with open('README.md', 'r') as file:
     long_description = file.read()
 
 try:
-    with open('requiremnts.txt', 'r') as file:
+    with open('requirements.txt', 'r') as file:
         requirements = [f.strip() for f in file.readlines()]
 except FileNotFoundError:
     print('[!] Falling back to hardcoded requirements')
