@@ -125,7 +125,6 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
   earnings.
 - [x] `GET /jt-earnings/today` - Current day earnings for JumpTask mode, with detailed information about the origin of
   your earnings.
--
 
 </details>
 
