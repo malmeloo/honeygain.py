@@ -129,3 +129,36 @@ class DailyStats(GenericStats):
     Represents a daily stats entry.
     """
     date: date
+
+
+#
+# Balances
+#
+class Balance(BaseModel):
+    """
+    Represents a balance for any period of time.
+    Does not have to be account balance; for example, this object is
+    also used in the minimum payout field for HoneygainBalance.
+
+    Bonus credits/cents will always be 0 for normal mode.
+    """
+    credits: float = Field(alias='total_credits')
+    bonus_credits: Optional[float] = 0
+    usd_cents: int = Field(alias='total_usd_cents')
+    bonus_usd_cents: Optional[int] = 0
+
+    class Config:
+        """
+        Pydantic config to allow multiple aliases
+        """
+        allow_population_by_field_name = True
+
+
+class HoneygainBalance(BaseModel):
+    """
+    Contains multiple Balance objects with information about
+    the current day, lifetime and minimum payout threshold.
+    """
+    today: Balance = Field(alias='realtime')
+    lifetime: Balance = Field(alias='payout')
+    min_payout: Balance
