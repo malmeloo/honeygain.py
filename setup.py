@@ -5,16 +5,22 @@ from distutils.core import setup
 with open('README.md', 'r') as file:
     long_description = file.read()
 
+with open('requirements.txt', 'r') as file:
+    requirements = [f.strip() for f in file.readlines()]
+
 setup(
     name='Honeygain.py',
     version='1.0',
     description='Python wrapper for the Honeygain API.',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/DismissedGuy/honeygain.py',
 
     author='Mike A.',
     author_email='dismissed.is.a.guy@gmail.com',
     packages=['honeygain'],
+    install_requires=requirements,
+
     license='GPLv3',
     classifiers=[
         'Development Status :: 4 - Beta',
