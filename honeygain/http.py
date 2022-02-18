@@ -98,3 +98,6 @@ class HoneygainHTTP:
 
     def get_jt_balance(self) -> dict:
         return self.request('GET', '/earnings/jt')
+
+    def get_wallet_stats(self) -> dict:
+        return self.request('GET', '/earnings/wallet-stats')

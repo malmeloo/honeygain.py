@@ -162,3 +162,13 @@ class HoneygainBalance(BaseModel):
     today: Balance = Field(alias='realtime')
     lifetime: Balance = Field(alias='payout')
     min_payout: Balance
+
+
+class WalletStats(BaseModel):
+    """
+    Daily stats split up into Honeygain and JumpTask mode.
+    """
+    date: date
+
+    hg_credits: float
+    jt_credits: float

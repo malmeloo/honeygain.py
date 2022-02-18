@@ -3,7 +3,7 @@ from pydantic import parse_obj_as
 from .exceptions import ClientException
 from .http import HoneygainHTTP
 from .schemas import UserProfile, Device, TermsOfService, \
-    TodayStats, DailyStats, Balance, HoneygainBalance
+    TodayStats, DailyStats, Balance, HoneygainBalance, WalletStats
 
 
 def _requires_login(func):
@@ -93,3 +93,10 @@ class Client:
     def get_jt_balance(self) -> Balance:
         data = self.http.get_jt_balance().get('data')
         return Balance(**data)
+
+    @_requires_login
+    def get_wallet_stats(self) -> list[WalletStats]:
+        data = self.http.get_wallet_stats().get('data')
+        parsed: list[dict] = [{'date': k, **v} for k, v in data.items()]
+
+        return parse_obj_as(list[WalletStats], parsed)
