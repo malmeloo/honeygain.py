@@ -94,7 +94,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 
 - [x] `GET /earnings/jt` - Lifetime earnings in JumpTask mode
 - [x] `GET /users/balances` - Lifetime earnings for "normal" mode, as well as the minimum payout threshold
-- [ ] `GET /referrals/earnings` - Lifetime referral stats and earnings
+- [x] `GET /referrals/earnings` - Lifetime referral stats and earnings
 
 ### Daily earnings
 
