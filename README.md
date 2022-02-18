@@ -5,8 +5,7 @@ A python wrapper to interact with Honeygain's API.
 ## Installation
 
 ```shell
-$ coming soon...
-zsh: command not found: coming
+$ pip install honeygain.py
 ```
 
 ## Usage
