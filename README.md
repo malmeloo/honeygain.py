@@ -128,3 +128,13 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 -
 
 </details>
+
+## Contributing
+
+I realize that the way this library works right now might not be very intuitive at first - the issue is simply that
+Honeygain's (private!) API is not great. I've tried to introduce some improvements here and there, such as making
+property names
+*more_pep8_compliant*, but there's still a long way to go!
+
+If you have any suggestions for the library, I'd be happy to accept pull requests. Please do create an issue before
+making large modifications though, so we can discuss the changes before you spend your entire afternoon on it :p
