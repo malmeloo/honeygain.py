@@ -172,3 +172,16 @@ class WalletStats(BaseModel):
 
     hg_credits: float
     jt_credits: float
+
+
+#
+# Misc earnings
+#
+class ReferralEarnings(BaseModel):
+    """
+    Account earnings and other data from referrals.
+    """
+    count: int
+    total_earnings: float
+    average_earnings: float
+    first_referrals: list[str]

@@ -3,7 +3,8 @@ from pydantic import parse_obj_as
 from .exceptions import ClientException
 from .http import HoneygainHTTP
 from .schemas import UserProfile, Device, TermsOfService, \
-    TodayStats, DailyStats, Balance, HoneygainBalance, WalletStats
+    ReferralEarnings, TodayStats, DailyStats, \
+    Balance, HoneygainBalance, WalletStats
 
 
 def _requires_login(func):
@@ -83,6 +84,11 @@ class Client:
     def get_jt_today_earnings(self) -> TodayStats:
         data = self.http.get_jt_earnings_today()
         return TodayStats(**data)
+
+    @_requires_login
+    def get_referral_earnings(self) -> ReferralEarnings:
+        data = self.http.get_referral_earnings()
+        return ReferralEarnings(**data)
 
     @_requires_login
     def get_balance(self) -> HoneygainBalance:
