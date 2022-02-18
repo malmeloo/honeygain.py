@@ -15,9 +15,10 @@ setup(
     author='Mike A.',
     author_email='dismissed.is.a.guy@gmail.com',
     packages=['honeygain'],
-    license='License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    license='GPLv3',
     classifiers=[
         'Development Status :: 4 - Beta',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent'
     ]
 )
