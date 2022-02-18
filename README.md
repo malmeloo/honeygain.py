@@ -75,7 +75,8 @@ Two options:
 
 The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version}`. Version is 1 unless otherwise noted.
 
-### General account
+<details open>
+<summary>General account</summary>
 
 - [x] `POST /users/tokens` - Logging in with email + password
 - [x] `GET /users/me` - Account details
@@ -83,28 +84,47 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 - [x] `GET /devices` - Currently active devices and stats about them.
   **Note:** uses API v2.
 
-### Notifications
+</details>
+
+
+<details open>
+<summary>Notifications</summary>
 
 - [ ] `GET /notifications?user_id=<user id>` Get your notifications (why is there a user ID here??)
 - [ ] `POST /notifications/<notif ID>/actions` Interact with the notification
 - [ ] `GET /contest_winnings` Get the winnings of a contest. Can only be called after interacting with the notification
   as above.
 
-### Lifetime earnings
+</details>
+
+
+<details open>
+<summary>Lifetime earnings</summary>
 
 - [x] `GET /earnings/jt` - Lifetime earnings in JumpTask mode
 - [x] `GET /users/balances` - Lifetime earnings for "normal" mode, as well as the minimum payout threshold
 - [x] `GET /referrals/earnings` - Lifetime referral stats and earnings
 
-### Daily earnings
+</details>
+
+
+<details open>
+<summary>Daily earnings</summary>
 
 - [x] `GET /earnings/stats` - Detailed daily earnings in "normal" mode for the past month
 - [x] `GET /jt-earnings/stats` - Detailed daily earnings in JumpTask mode for the past month
 - [x] `GET /earnings/wallet-stats` - Daily earnings broken down into normal and JumpTask modes.
 
-### Current day earnings
+</details>
+
+
+<details open>
+<summary>Current day earnings</summary>
 
 - [x] `GET /earnings/today` - Current day earnings for "normal" mode, with detailed information about the origin of your
   earnings.
 - [x] `GET /jt-earnings/today` - Current day earnings for JumpTask mode, with detailed information about the origin of
   your earnings.
+-
+
+</details>
