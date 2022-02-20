@@ -68,6 +68,7 @@ class Notification(BaseModel):
     template: str
     priority: int
 
+    hash: str
     title: str
     body: str
 

@@ -84,6 +84,18 @@ class Client:
         return parse_obj_as(list[Notification], data)
 
     @_requires_login
+    def claim_credits(self) -> float:
+        # this should also populate self._user_id through get_notifications
+        notif = self._get_honeypot_notif()
+        if notif is None:
+            raise ClientException('Honeypot cannot be claimed yet!')
+
+        self.http.claim_credits(notif.hash, notif.campaign_id, self._user_id)
+        resp = self.http.check_credits_claimed()
+
+        return resp.get('data', {}).get('credits')
+
+    @_requires_login
     def get_monthly_stats(self) -> list[DailyStats]:
         data = self.http.get_stats()
         parsed: list[dict] = [{'date': k, **v} for k, v in data.items()]

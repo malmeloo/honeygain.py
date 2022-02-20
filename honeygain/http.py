@@ -55,6 +55,9 @@ class HoneygainHTTP:
         except requests.HTTPError as ex:
             raise HTTPException(f'Error while calling API: {ex.strerror}')
 
+        if r.status_code == 201:
+            return {}
+
         try:
             data = r.json()
         except JSONDecodeError:
@@ -83,6 +86,18 @@ class HoneygainHTTP:
 
     def get_notifications(self, user_id: int) -> dict:
         return self.request('GET', '/notifications', params={'user_id': user_id})
+
+    def claim_credits(self, notif_id: str, campaign_id: str, user_id: str) -> dict:
+        endpoint = f'/notifications/{notif_id}/actions'
+        payload = {
+            'campaign_id': campaign_id,
+            'user_id': user_id,
+            'action': 'triggered'
+        }
+        return self.request('POST', endpoint, json=payload)
+
+    def check_credits_claimed(self) -> dict:
+        return self.request('POST', '/contest_winnings')
 
     def get_stats(self) -> dict:
         return self.request('GET', '/earnings/stats')
