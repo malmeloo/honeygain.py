@@ -74,7 +74,10 @@ Two options:
 
 The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version}`. Version is 1 unless otherwise noted.
 
-<details open>
+This library currently supports all endpoints of the Honeygain API as used by the official dashboard, and it is
+therefore able to get the same information and perform the same actions as you normally would through the dashboard.
+
+<details>
 <summary>General account</summary>
 
 - [x] `POST /users/tokens` - Logging in with email + password
@@ -86,18 +89,18 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 </details>
 
 
-<details open>
+<details>
 <summary>Notifications</summary>
 
 - [x] `GET /notifications?user_id=<user id>` Get your notifications (why is there a user ID here??)
-- [ ] `POST /notifications/<notif ID>/actions` Interact with the notification
-- [ ] `GET /contest_winnings` Get the winnings of a contest. Can only be called after interacting with the notification
+- [x] `POST /notifications/<notif ID>/actions` Interact with the notification
+- [x] `GET /contest_winnings` Get the winnings of a contest. Can only be called after interacting with the notification
   as above.
 
 </details>
 
 
-<details open>
+<details>
 <summary>Lifetime earnings</summary>
 
 - [x] `GET /earnings/jt` - Lifetime earnings in JumpTask mode
@@ -107,7 +110,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 </details>
 
 
-<details open>
+<details>
 <summary>Daily earnings</summary>
 
 - [x] `GET /earnings/stats` - Detailed daily earnings in "normal" mode for the past month
@@ -117,7 +120,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 </details>
 
 
-<details open>
+<details>
 <summary>Current day earnings</summary>
 
 - [x] `GET /earnings/today` - Current day earnings for "normal" mode, with detailed information about the origin of your
