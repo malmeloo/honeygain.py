@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import parse_obj_as
 
 from .exceptions import ClientException
@@ -26,6 +28,11 @@ class Client:
         self.http = HoneygainHTTP()
         self._user_id = None
 
+    def _get_honeypot_notif(self) -> Optional[Notification]:
+        notifications = self.get_notifications()
+        return next((n for n in notifications
+                     if n.template == 'lucky_pot'), None)
+
     @property
     def token(self):
         return self.http.token
@@ -37,6 +44,10 @@ class Client:
 
         self.http.prepare()
         self.http.token = account_token
+
+    @property
+    def can_claim_credits(self):
+        return self._get_honeypot_notif() is not None
 
     def login(self, email, password):
         if self.http.is_logged_in:
@@ -65,7 +76,7 @@ class Client:
         return TermsOfService(**data)
 
     @_requires_login
-    def get_notifications(self):
+    def get_notifications(self) -> list[Notification]:
         if self._user_id is None:  # populate user ID first
             self.get_profile()
 
