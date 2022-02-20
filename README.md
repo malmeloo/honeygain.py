@@ -89,7 +89,7 @@ The base URL for all endpoints is `https://dashboard.honeygain.com/api/v{version
 <details open>
 <summary>Notifications</summary>
 
-- [ ] `GET /notifications?user_id=<user id>` Get your notifications (why is there a user ID here??)
+- [x] `GET /notifications?user_id=<user id>` Get your notifications (why is there a user ID here??)
 - [ ] `POST /notifications/<notif ID>/actions` Interact with the notification
 - [ ] `GET /contest_winnings` Get the winnings of a contest. Can only be called after interacting with the notification
   as above.

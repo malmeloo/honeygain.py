@@ -60,6 +60,18 @@ class Device(BaseModel):
     stats: DeviceStats
 
 
+class Notification(BaseModel):
+    """
+    Represents a user's (unread) notifications.
+    """
+    campaign_id: str
+    template: str
+    priority: int
+
+    title: str
+    body: str
+
+
 #
 # Statistics
 #

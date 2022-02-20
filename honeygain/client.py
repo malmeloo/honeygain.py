@@ -3,7 +3,7 @@ from pydantic import parse_obj_as
 from .exceptions import ClientException
 from .http import HoneygainHTTP
 from .schemas import UserProfile, Device, TermsOfService, \
-    ReferralEarnings, TodayStats, DailyStats, \
+    Notification, ReferralEarnings, TodayStats, DailyStats, \
     Balance, HoneygainBalance, WalletStats
 
 
@@ -24,6 +24,7 @@ class Client:
         A Client that communicates with the HoneyGain API.
         """
         self.http = HoneygainHTTP()
+        self._user_id = None
 
     @property
     def token(self):
@@ -49,6 +50,8 @@ class Client:
     @_requires_login
     def get_profile(self) -> UserProfile:
         data = self.http.get_me().get('data')
+        self._user_id = data.get('id')  # store this for notifications
+
         return UserProfile(**data)
 
     @_requires_login
@@ -60,6 +63,14 @@ class Client:
     def get_tos(self) -> TermsOfService:
         data = self.http.get_tos().get('data')
         return TermsOfService(**data)
+
+    @_requires_login
+    def get_notifications(self):
+        if self._user_id is None:  # populate user ID first
+            self.get_profile()
+
+        data = self.http.get_notifications(self._user_id).get('data')
+        return parse_obj_as(list[Notification], data)
 
     @_requires_login
     def get_monthly_stats(self) -> list[DailyStats]:

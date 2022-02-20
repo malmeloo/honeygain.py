@@ -81,6 +81,9 @@ class HoneygainHTTP:
     def get_tos(self) -> dict:
         return self.request('GET', '/users/tos')
 
+    def get_notifications(self, user_id: int) -> dict:
+        return self.request('GET', '/notifications', params={'user_id': user_id})
+
     def get_stats(self) -> dict:
         return self.request('GET', '/earnings/stats')
 
