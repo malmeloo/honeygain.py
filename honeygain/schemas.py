@@ -54,9 +54,9 @@ class Device(BaseModel):
     version: str
     streaming_enabled: bool
 
-    ip: str
+    ip: Optional[str]
     status: str
-    last_active_time: datetime
+    last_active_time: Optional[datetime]
     stats: DeviceStats
 
 
