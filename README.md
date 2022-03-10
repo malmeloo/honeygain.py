@@ -1,6 +1,12 @@
 # Honeygain.py
 
-A python wrapper to interact with Honeygain's API.
+[![Upload Python Package](https://github.com/DismissedGuy/honeygain.py/actions/workflows/python-publish.yml/badge.svg)](https://github.com/DismissedGuy/honeygain.py/actions/workflows/python-publish.yml)
+![](https://img.shields.io/pypi/wheel/honeygain.py)
+
+![](https://img.shields.io/pypi/v/honeygain.py)
+![](https://img.shields.io/pypi/dm/honeygain.py)
+
+A python wrapper to interact with Honeygain's dashboard API.
 
 ## Installation
 
