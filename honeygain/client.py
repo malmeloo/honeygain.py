@@ -58,6 +58,15 @@ class Client:
         token = self.http.get_token(email, password)
         self.token = token
 
+    def create_account(self, email, password):
+        if self.http.is_logged_in:
+            raise ClientException('You must logout first')
+
+        # Clean up session and fetch our token
+        self.http.prepare()
+        token = self.http.create_account(email, password)
+        self.token = token
+
     @_requires_login
     def get_profile(self) -> UserProfile:
         data = self.http.get_me().get('data')

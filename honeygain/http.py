@@ -55,8 +55,8 @@ class HoneygainHTTP:
         except requests.HTTPError as ex:
             raise HTTPException(f'Error while calling API: {ex.strerror}')
 
-        if r.status_code == 201:
-            return {}
+        # if r.status_code == 201:
+        #     return {}
 
         try:
             data = r.json()
@@ -72,6 +72,12 @@ class HoneygainHTTP:
     def get_token(self, email, password) -> str:
         payload = {'email': email, 'password': password}
         resp = self.request('POST', '/users/tokens', json=payload)
+
+        return resp.get('data', dict()).get('access_token')
+
+    def create_account(self, email, password) -> str:
+        payload = {'email': email, 'password': password}
+        resp = self.request('POST', '/users', json=payload)
 
         return resp.get('data', dict()).get('access_token')
 
