@@ -15,7 +15,7 @@ class UserProfile(BaseModel):
     email: str
     status: str
 
-    jumptask_mode: bool = Field(False, alias='jt_toggle')
+    jumptask_mode: Optional[bool] = Field(False, alias='jt_toggle')
 
     total_device_count: int = Field(alias='total_devices')
     active_device_count: int = Field(alias='active_devices_count')
