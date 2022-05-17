@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 #
@@ -24,6 +24,17 @@ class UserProfile(BaseModel):
     referral_code: str
     created_at: datetime
     features: list[str]
+
+    # the jt_toggle field does not exist and is therefore None
+    # if the user has never toggled JumpTask mode before; this
+    # Config and validator make sure that the value is set to False instead.
+    class Config:
+        validate_assignment = True
+
+    # noinspection PyMethodParameters
+    @validator('jumptask_mode')
+    def set_jt(cls, jt_enabled: bool):
+        return jt_enabled or False
 
 
 class TermsOfService(BaseModel):
