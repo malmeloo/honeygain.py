@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import parse_obj_as
 
-from .exceptions import ClientException
+from .exceptions import ClientException, HTTPException
 from .http import HoneygainHTTP
 from .schemas import UserProfile, Device, TermsOfService, \
     Notification, ReferralEarnings, TodayStats, DailyStats, \
@@ -66,6 +66,15 @@ class Client:
         self.http.prepare()
         token = self.http.create_account(email, password)
         self.token = token
+
+    @_requires_login
+    def confirm_email(self, token: str) -> bool:
+        try:
+            self.http.confirm_email(token)
+        except HTTPException:
+            raise ClientException('Provided email token is incorrect')
+
+        return True
 
     @_requires_login
     def get_profile(self) -> UserProfile:
