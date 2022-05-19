@@ -97,6 +97,12 @@ class HoneygainHTTP:
 
         return True
 
+    def authorize_code(self, code: str):
+        payload = {'code': code}
+        self.request('PATCH', '/user_confirmations', json=payload)
+
+        return True
+
     def get_me(self) -> dict:
         return self.request('GET', '/users/me')
 

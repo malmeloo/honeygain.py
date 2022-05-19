@@ -86,6 +86,12 @@ class Client:
         return True
 
     @_requires_login
+    def authorize_code(self, code: str):
+        self.http.authorize_code(code)
+
+        return True
+
+    @_requires_login
     def get_profile(self) -> UserProfile:
         data = self.http.get_me().get('data')
         self._user_id = data.get('id')  # store this for notifications
