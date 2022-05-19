@@ -83,9 +83,19 @@ class HoneygainHTTP:
 
     def confirm_email(self, token: str):
         payload = {'confirmation_token': token}
-        resp = self.request('POST', '/users/confirmations', json=payload)
+        self.request('POST', '/users/confirmations', json=payload)
 
-        return resp
+        return True
+
+    def jt_toggle(self, enabled: bool, pub_addr: str = None):
+        payload = {'jt_toggle': enabled}
+        if pub_addr is not None:
+            payload['jt_key'] = pub_addr
+            payload['wallet'] = 'walletkey'
+
+        self.request('PATCH', '/settings/jt', json=payload)
+
+        return True
 
     def get_me(self) -> dict:
         return self.request('GET', '/users/me')

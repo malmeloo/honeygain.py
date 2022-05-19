@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import parse_obj_as
 
-from .exceptions import ClientException, HTTPException
+from .exceptions import ClientException, HTTPException, SecurityCheckException
 from .http import HoneygainHTTP
 from .schemas import UserProfile, Device, TermsOfService, \
     Notification, ReferralEarnings, TodayStats, DailyStats, \
@@ -73,6 +73,15 @@ class Client:
             self.http.confirm_email(token)
         except HTTPException:
             raise ClientException('Provided email token is incorrect')
+
+        return True
+
+    @_requires_login
+    def set_jt(self, enabled: bool, pub_addr: str = None):
+        try:
+            self.http.jt_toggle(enabled, pub_addr)
+        except HTTPException:
+            raise SecurityCheckException('Security check required, please check your email')
 
         return True
 
